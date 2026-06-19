@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Startup Incubator | Predictive Analysis & Business Accelerator</title>
+  <meta name="description" content="Validate your startup idea, calculate risk rates, forecast success metrics, view competitor insights, and download professional PDF reports using cutting-edge artificial intelligence.">
+  
+  <!-- Premium Typography: Google Fonts (Outfit and Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dark-theme">
+  
+  <!-- Interactive Particle Background -->
+  <canvas id="particle-canvas"></canvas>
+  
+  <!-- Ambient Background Gradients -->
+  <div class="gradient-bg-glow glow-1"></div>
+  <div class="gradient-bg-glow glow-2"></div>
+
+  <!-- Main Container -->
+  <main class="app-container">
+    
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="logo-area">
+        <i class="fa-solid fa-wand-magic-sparkles logo-icon"></i>
+        <h1>INCUBATOR<span class="highlight">.AI</span></h1>
+      </div>
+      <p class="tagline">Next-Generation Predictive Venture Intelligence</p>
+    </header>
+
+    <!-- SECTION 1: PITCH DECK INPUT PANEL -->
+    <section id="pitch-panel" class="panel glass-card active">
+      <div class="panel-header">
+        <h2>Pitch Your Vision</h2>
+        <p>Provide your concept, target platform, and available seed capital. Our AI will perform immediate risk assessment and design an operational roadmap.</p>
+      </div>
+
+      <form id="pitch-form" class="incubator-form">
+        <!-- Input: Startup Idea -->
+        <div class="input-group">
+          <label for="startup-idea">
+            <i class="fa-solid fa-lightbulb"></i> Startup Concept & Core Value Proposition
+          </label>
+          <textarea 
+            id="startup-idea" 
+            name="idea" 
+            placeholder="Describe your startup. e.g., 'An AI-driven platform that automates grocery delivery routing for local stores, reducing fuel consumption by using real-time traffic heuristics...'" 
+            required
+            rows="5"
+          ></textarea>
+          <small class="helper-text">Be descriptive! The more detail you provide about your product, audience, and revenue model, the better the AI analysis.</small>
+        </div>
+
+        <!-- Inputs Row -->
+        <div class="inputs-row">
+          <!-- Input: Budget Amount -->
+          <div class="input-group half-width">
+            <label for="startup-amount">
+              <i class="fa-solid fa-dollar-sign"></i> Available Capital (USD)
+            </label>
+            <div class="price-input-wrapper">
+              <span class="currency-symbol">$</span>
+              <input 
+                type="number" 
+                id="startup-amount" 
+                name="amount" 
+                placeholder="e.g. 25000" 
+                min="1000" 
+                required
+              >
+            </div>
+            <small class="helper-text">Minimum funding: $1,000</small>
+          </div>
+
+          <!-- Input: Target Platform -->
+          <div class="input-group half-width">
+            <label for="startup-platform">
+              <i class="fa-solid fa-cubes"></i> Target Platform
+            </label>
+            <div class="select-wrapper">
+              <select id="startup-platform" name="platform" required>
+                <option value="" disabled selected>Select execution channel...</option>
+                <option value="Web App">Web Application (React, NextJS)</option>
+                <option value="Mobile App">Mobile Application (iOS/Android)</option>
+                <option value="SaaS Portal">B2B SaaS Portal</option>
+                <option value="Desktop App">Desktop Application</option>
+                <option value="Hardware/IoT">Hardware / IoT Integration</option>
+              </select>
+              <i class="fa-solid fa-chevron-down select-arrow"></i>
+            </div>
+            <small class="helper-text">Primary delivery model</small>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="submit-pitch-btn" class="primary-btn glow-button">
+          <span>Begin Incubation Scan</span>
+          <i class="fa-solid fa-rocket animate-float"></i>
+        </button>
+      </form>
+    </section>
+
+    <!-- SECTION 2: LOADING & PROCESSING SCREEN -->
+    <section id="loading-panel" class="panel glass-card">
+      <div class="loading-content">
+        <div class="quantum-loader">
+          <div class="circle outer"></div>
+          <div class="circle middle"></div>
+          <div class="circle inner"></div>
+          <i class="fa-solid fa-brain loader-brain"></i>
+        </div>
+        
+        <h2>Simulating Incubator Parameters</h2>
+        <p class="loading-subtitle">Synthesizing platform datasets and forecasting growth rates...</p>
+        
+        <!-- Live Loading Checklist -->
+        <ul class="loading-checklist">
+          <li id="step-1" class="check-item active">
+            <i class="fa-solid fa-circle-notch fa-spin status-icon"></i> Scoping global market sector trends...
+          </li>
+          <li id="step-2" class="check-item">
+            <i class="fa-solid fa-clock status-icon"></i> Benchmarking direct competitors & USPs...
+          </li>
+          <li id="step-3" class="check-item">
+            <i class="fa-solid fa-clock status-icon"></i> Constructing double-entry budget forecasts...
+          </li>
+          <li id="step-4" class="check-item">
+            <i class="fa-solid fa-clock status-icon"></i> Formulating strategic development milestones...
+          </li>
+        </ul>
+
+        <!-- Progress Bar -->
+        <div class="progress-bar-container">
+          <div id="loader-progress" class="progress-bar-fill"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: REPORTS DASHBOARD -->
+    <section id="dashboard-panel" class="panel">
+      
+      <!-- Top Actions Bar -->
+      <div class="dashboard-top-bar glass-card">
+        <button id="back-pitch-btn" class="secondary-btn">
+          <i class="fa-solid fa-arrow-left"></i> Pitches
+        </button>
+        <div class="dashboard-title">
+          <h2>Predictive Analysis Dashboard</h2>
+          <span class="live-badge"><span class="pulse-dot"></span>AI Live Report</span>
+        </div>
+        <button id="download-report-btn" class="primary-btn pulse-glow">
+          <i class="fa-solid fa-file-pdf"></i> Download PDF Report
+        </button>
+      </div>
+
+      <!-- Dashboard Grid -->
+      <div class="dashboard-grid">
+        
+        <!-- COLUMN 1: KEY METRICS (LEFT) -->
+        <div class="dashboard-column flex-col">
+          
+          <!-- Card: Success Rate & Innovation Score -->
+          <div class="metrics-split-row">
+            <!-- Card: Success Rate -->
+            <div class="glass-card metric-box hover-3d">
+              <div class="card-icon-header">
+                <i class="fa-solid fa-chart-line-up green-glow"></i>
+                <h3>SUCCESS RATE</h3>
+              </div>
+              <div class="metric-value-container">
+                <span id="metric-success-rate" class="metric-value counter">0</span><span class="metric-unit">%</span>
+              </div>
+              <p class="metric-desc">Propensity to hit product-market fit based on sector demand.</p>
+            </div>
+
+            <!-- Card: Innovation Rating -->
+            <div class="glass-card metric-box hover-3d">
+              <div class="card-icon-header">
+                <i class="fa-solid fa-bolt blue-glow"></i>
+                <h3>INNOVATION</h3>
+              </div>
+              <div class="metric-value-container">
+                <span id="metric-innovation-score" class="metric-value counter">0</span><span class="metric-unit">/100</span>
+              </div>
+              <p class="metric-desc">Uniqueness and technological complexity score.</p>
+            </div>
+          </div>
+
+          <!-- Card: Risk Gauge -->
+          <div class="glass-card metric-box hover-3d flex-grow">
+            <div class="card-icon-header">
+              <i class="fa-solid fa-gauge-high red-glow"></i>
+              <h3>RISK FACTOR PROFILE</h3>
+            </div>
+            
+            <!-- Animated Risk Gauge Arc -->
+            <div class="risk-gauge-wrapper">
+              <svg class="gauge-svg" viewBox="0 0 200 120">
+                <!-- Defs for gradients -->
+                <defs>
+                  <linearGradient id="gauge-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#10b981" /> <!-- Green -->
+                    <stop offset="50%" stop-color="#f59e0b" /> <!-- Yellow -->
+                    <stop offset="100%" stop-color="#ef4444" /> <!-- Red -->
+                  </linearGradient>
+                </defs>
+                <!-- Track Arc -->
+                <path class="gauge-track" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#1f2937" stroke-width="12" stroke-linecap="round" />
+                <!-- Active Value Color Arc -->
+                <path class="gauge-value" id="gauge-fill-arc" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gauge-grad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2" />
+                <!-- Gauge Needle Pin -->
+                <circle cx="100" cy="100" r="8" fill="#ffffff" />
+                <!-- Needle Pointer -->
+                <line id="gauge-needle" x1="100" y1="100" x2="100" y2="40" stroke="#ffffff" stroke-width="3" stroke-linecap="round" style="transform-origin: 100px 100px; transform: rotate(-90deg); transition: transform 2s cubic-bezier(0.18, 0.89, 0.32, 1.28);" />
+              </svg>
+              <div class="risk-value-display">
+                <span id="metric-risk-rate" class="counter">0</span>%
+              </div>
+            </div>
+            <p class="metric-desc text-center font-bold" id="risk-rating-badge">Calculating Risk...</p>
+          </div>
+
+          <!-- Card: Capital Assessment -->
+          <div class="glass-card metric-box hover-3d">
+            <div class="card-icon-header">
+              <i class="fa-solid fa-wallet gold-glow"></i>
+              <h3>CAPITAL FORECAST</h3>
+            </div>
+            
+            <div class="capital-details">
+              <div class="capital-row">
+                <span>Required Launch Budget:</span>
+                <span id="metric-required-budget" class="font-bold highlight-cyan">$0</span>
+              </div>
+              <div class="capital-row">
+                <span>Funding Status:</span>
+                <span id="metric-budget-status" class="status-badge">Unknown</span>
+              </div>
+              <p id="metric-budget-explanation" class="budget-explanation-text">Calculating details...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUMN 2: STRATEGY & ROADMAP (RIGHT) -->
+        <div class="dashboard-column flex-col">
+          
+          <!-- Card: AI Recommendations -->
+          <div class="glass-card flex-grow hover-3d">
+            <div class="card-icon-header">
+              <i class="fa-solid fa-lightbulb-on purple-glow"></i>
+              <h3>AI STRATEGIC ADAPTATIONS</h3>
+            </div>
+            <ul id="recommendations-list" class="neon-list">
+              <li>Synthesizing strategies...</li>
+            </ul>
+          </div>
+
+          <!-- Card: Milestone Steps Roadmap -->
+          <div class="glass-card hover-3d">
+            <div class="card-icon-header">
+              <i class="fa-solid fa-route blue-glow"></i>
+              <h3>IMPLEMENTATION ROADMAP</h3>
+            </div>
+            
+            <div class="timeline-container" id="milestones-timeline">
+              <!-- Milestones load here -->
+              <p>Constructing phase pathways...</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Competitor Analysis & Analog Startups Section (Full Width Bottom Grid) -->
+      <div class="dashboard-bottom-grid">
+        <!-- Competitor Analysis -->
+        <div class="glass-card hover-3d half-width">
+          <div class="card-icon-header">
+            <i class="fa-solid fa-shield-halved red-glow"></i>
+            <h3>COMPETITOR LANDSCAPE & USP</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="competitors-table" id="competitor-table-body">
+              <thead>
+                <tr>
+                  <th>Competitor</th>
+                  <th>Core Strengths</th>
+                  <th>Core Weaknesses</th>
+                  <th>Our Competitive USP</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="4" class="text-center">Calculating competitors...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Similar Startup Analogs -->
+        <div class="glass-card hover-3d half-width">
+          <div class="card-icon-header">
+            <i class="fa-solid fa-network-wired blue-glow"></i>
+            <h3>SIMILAR STARTUP ANALOGS</h3>
+          </div>
+          <div class="analogs-container" id="analogs-list">
+            <p>Scanning historical records...</p>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- INTERACTIVE AI CHAT BUBBLE WIDGET -->
+  <div id="ai-chat-bubble" class="chat-bubble-collapsed">
+    <div class="chat-bubble-trigger glow-pulse">
+      <i class="fa-solid fa-comment-dots"></i>
+      <span class="chat-unread-badge">1</span>
+    </div>
+
+    <!-- Chat Window Content -->
+    <div class="chat-window glass-card">
+      <div class="chat-window-header">
+        <div class="chat-advisor-info">
+          <i class="fa-solid fa-user-astronaut chat-avatar"></i>
+          <div>
+            <h4>Incubator AI Advisor</h4>
+            <span class="advisor-status">Online • Ready</span>
+          </div>
+        </div>
+        <button id="close-chat-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Messages Body -->
+      <div class="chat-messages-container" id="chat-messages">
+        <div class="chat-message model">
+          <div class="message-content">
+            Hello! I am your AI Incubator Advisor. Pitch your startup idea in the form, and I will assist you with answering queries, refining your monetization models, or planning marketing tasks.
+          </div>
+          <span class="message-time">Just Now</span>
+        </div>
+      </div>
+
+      <!-- Form Inputs -->
+      <form id="chat-input-form" class="chat-input-area">
+        <input 
+          type="text" 
+          id="chat-message-input" 
+          placeholder="Ask about marketing, budget, risks..." 
+          autocomplete="off"
+          required
+        >
+        <button type="submit" id="send-chat-btn"><i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Loading Overlay for PDF Generating or general actions -->
+  <div id="action-overlay" class="action-overlay-hidden">
+    <div class="overlay-spinner">
+      <i class="fa-solid fa-spinner fa-spin"></i>
+      <span id="overlay-status-text">Processing Request...</span>
+    </div>
+  </div>
+
+  <!-- Script Modules -->
+  <script src="js/particles.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
